@@ -1,0 +1,333 @@
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+
+<style>
+
+body{
+margin:0px;
+padding:0px;
+}
+
+#container {
+background:url("Image.jpeg") center no-repeat;
+background-size:cover;
+height:1000px;
+width: 1800px;
+margin:0 auto;
+position:relative;
+}
+
+#cylinder1{
+
+left: 21%;
+top: 6%;
+}
+
+#cylinder2{
+
+left: 21%;
+top: 77%;
+}
+
+#cylinder3{
+
+left: 76%;
+top: 3%;
+}
+
+#cylinder4{
+
+left: 77%;
+top: 75%;
+}
+
+
+
+#mcylinder1{
+
+left: 26.5%;
+top: 27%;
+}
+
+#mcylinder2{
+
+left: 27%;
+top: 54%;
+}
+
+#mcylinder3{
+
+left: 37%;
+top: 19%;
+}
+
+#mcylinder4{
+
+left: 38%;
+top: 64%;
+}
+
+#ncylinder1{
+
+left: 47%;
+top: 22%;
+}
+
+#ncylinder2{
+
+left: 47%;
+top: 58%;
+}
+
+#ocylinder1{
+
+left: 37%;
+top: 23%;
+}
+
+#ocylinder2{
+
+left: 38%;
+top: 59%;
+}
+
+
+
+
+#coordinates{
+color:green;
+font-weight:bold;
+size:14px;
+
+}
+
+
+.cylinder{
+  height: 25px;
+  width: 25px;
+  background-color: red;
+  border-radius: 50%;
+  position:absolute;
+  transition: transform .2s;
+}
+.cylinder:hover{
+transform: scale(1.5);
+
+}
+
+.mcylinder{
+  height: 25px;
+  width: 25px;
+  background-color: blue;
+  border-radius: 50%;
+  position:absolute;
+   transition: transform .2s;
+}
+.mcylinder:hover{
+transform: scale(1.5);
+
+}
+
+
+.ncylinder{
+  height: 25px;
+  width: 25px;
+  background-color: green;
+  border-radius: 50%;
+  position:absolute;
+   transition: transform .2s;
+}
+.ncylinder:hover{
+transform: scale(1.5);
+
+}
+
+.ocylinder{
+  height: 25px;
+  width: 25px;
+  background-color: yellow;
+  border-radius: 50%;
+  position:absolute;
+   transition: transform .2s;
+}
+.ocylinder:hover{
+transform: scale(1.5);
+
+}
+
+
+.overlay {
+  height: 70%;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0, 0.9);
+  overflow-x: hidden;
+  transition: 0.5s;
+}
+
+.overlay-content {
+  position: relative;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  margin-top: 30px;
+  font-size: 25px;
+}
+
+.overlay a {
+  padding: 8px;
+  text-decoration: none;
+  font-size: 36px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.overlay{
+  color: #f1f1f1;
+}
+
+.overlay .closebtn {
+  position: absolute;
+  top: 20px;
+  right: 45px;
+  font-size: 60px;
+  color: red;
+}
+li {
+    list-style: none;
+}
+
+</style>
+
+<title>Plant Details
+</title>
+</head>
+<body>
+<h1>Plant Details</h1>
+<div id="container">
+<div id="coordinates">
+</div>
+
+<div id="myNav" class="overlay">
+  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+  <div class="overlay-content">
+ 
+  </div>
+</div>
+
+
+
+
+
+
+<div class="cylinder" id="cylinder1"></div>
+<div class="cylinder" id="cylinder2"></div>
+<div class="cylinder" id="cylinder3"></div>
+<div class="cylinder" id="cylinder4"></div>
+
+<div class="mcylinder" id="mcylinder1"></div>
+<div class="mcylinder" id="mcylinder2"></div>
+<div class="mcylinder" id="mcylinder3"></div>
+<div class="mcylinder" id="mcylinder4"></div>
+
+
+<div class="ncylinder" id="ncylinder1"></div>
+<div class="ncylinder" id="ncylinder2"></div>
+
+<div class="ocylinder" id="ocylinder1"></div>
+<div class="ocylinder" id="ocylinder2"></div>
+
+</div>
+
+</body>
+
+<script>
+
+
+data = {
+'cylinder1':["12/1/22","Recoated Carbon"],
+'cylinder2':["12/10/22","Recoated Carbon"],
+'cylinder3':[],
+'cylinder4':[],
+'mcylinder1':["OE","Motor: 10/10/22","Also 12/3/17: Motor Change"],
+'mcylinder2':["OE","Motor: 10/11/22","Also 12/3/17: Motor Change"],
+'mcylinder3':["OE: Motor","Sludge Pump: 2/10/2022"],
+'mcylinder4':["OE: Motor", "Sludge Pump: OE"],
+'ncylinder1':["3/6/23","Sight Values"],
+'ncylinder2':["OE","Motor"],
+'ocylinder1':["10/5/19","Recycle Pump","OE","Motor"],
+'ocylinder2':["OE","Motor","OE","Recycle Pump"],
+};
+function closeNav() {
+ document.getElementById("myNav").style.width = "0%";
+}
+$('.cylinder').click(function(e){
+   var id = $(this).attr('id');
+var mydata = data[id];
+if(mydata.length==0){
+mydata = ["No Data Yet!"];
+}
+var list = "<ul>";
+for (md of mydata) {
+list += "<li>"+md+"</li>";
+}
+list += "</ul>"
+$(".overlay-content").html(list);
+document.getElementById("myNav").style.width = "100%";
+});
+
+$('.mcylinder').click(function(e){
+   var id = $(this).attr('id');
+var mydata = data[id];
+if(mydata.length==0){
+mydata = ["No Data Yet"];
+}
+var list = "<ul>";
+for (md of mydata) {
+list += "<li>"+md+"</li>";
+}
+list += "</ul>"
+$(".overlay-content").html(list);
+document.getElementById("myNav").style.width = "100%";
+});
+
+$('.ncylinder').click(function(e){
+  var id = $(this).attr('id');
+var mydata = data[id];
+if(mydata.length==0){
+mydata = ["No Data Yet"];
+}
+var list = "<ul>";
+for (md of mydata) {
+list += "<li>"+md+"</li>";
+}
+list += "</ul>"
+$(".overlay-content").html(list);
+document.getElementById("myNav").style.width = "100%";
+});
+
+$('.ocylinder').click(function(e){
+var id = $(this).attr('id');
+var mydata = data[id];
+if(mydata.length==0){
+mydata = ["No Data Yet!"];
+}
+var list = "<ul>";
+for (md of mydata) {
+list += "<li>"+md+"</li>";
+}
+list += "</ul>"
+$(".overlay-content").html(list);
+document.getElementById("myNav").style.width = "100%";
+});
+ 
+
+ 
+</script>
+
+</html>
